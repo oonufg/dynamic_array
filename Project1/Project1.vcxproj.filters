@@ -21,12 +21,12 @@
     <ClCompile Include="main.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="dynamic_massiv.c">
+    <ClCompile Include="DynamicMassive\dynamic_massiv.c">
       <Filter>Файлы заголовков\dynamic_massive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dynamic_massiv.h">
+    <ClInclude Include="DynamicMassive\dynamic_massiv.h">
       <Filter>Файлы заголовков\dynamic_massive</Filter>
     </ClInclude>
   </ItemGroup>

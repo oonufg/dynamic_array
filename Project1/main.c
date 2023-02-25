@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "dynamic_massiv.h"
+#include "DynamicMassive/dynamic_massiv.h"
 int main()
 {
 	struct dArray* arr = arrayConstructor(sizeof(int));
@@ -8,10 +8,5 @@ int main()
 	{
 		arrayWrite(arr, i, i * 2);
 	}
-	printf("%d", arr);
-	printf("\n");
-
 	arrayDestructor(arr);
-	printf("%d", arr);
-
 }
