@@ -4,22 +4,28 @@
 
 struct dArray
 {
-	int* data;
+	void* data;
 	int capacity;
 	int size;
+	int typeSize;
 };
 
 void* arrayConstructor(int typeSize) 
 {
 	struct dArray* arrPtr = malloc(sizeof(struct dArray));
-	if (arrPtr != NULL)
+	if (arrPtr != NULL && typeSize > 0)
 	{
 		arrPtr->data = malloc(typeSize * 2);
 		if (arrPtr->data != NULL)
 		{
 			arrPtr->size = 0;
 			arrPtr->capacity = 2;
+			arrPtr->typeSize = typeSize;
 		}
+	}
+	else
+	{
+		printf("Memmory allocate error");
 	}
 	return arrPtr;
 }
@@ -38,12 +44,12 @@ void arrayDestructor(struct dArray* arrPtr)
 
 void arrayExtend(struct dArray* arrPtr)
 {
-	int* newData = malloc(sizeof(arrPtr->data[0]) * (arrPtr->capacity * 2));
+	void* newData = malloc(sizeof(arrPtr->typeSize) * (arrPtr->capacity * 2));
 	if (newData != NULL)
 	{
-		for (int i = 0; i < arrPtr->size; i++)
+		for (int i = 0; i < (arrPtr->size * arrPtr->typeSize); i++)
 		{
-			newData[i] = arrPtr->data[i];
+			((char*)newData)[i] = ((char*)arrPtr->data)[i];
 		}
 		free(arrPtr->data);
 		arrPtr->data = newData;
@@ -55,46 +61,32 @@ void arrayExtend(struct dArray* arrPtr)
 	}
 }
 
-void arrayWrite(struct dArray* arrayPtr, int index, int value)
+void arrayWrite(struct dArray* arrayPtr, int index, void* value)
 {
 	if (arrayPtr != NULL)
 	{
-		if(index >= 0 && index < arrayPtr->size + 1)
+		if (index >= 0 && index <= arrayPtr->size);
 		{
-			if (arrayPtr->data != NULL)
+			if (arrayPtr->size == arrayPtr->capacity)
 			{
-				if (arrayPtr->size == arrayPtr->capacity)
-				{
-					arrayExtend(arrayPtr);
-				}
-				arrayPtr->data[index] = value;
-				if (index == arrayPtr->size)
-				{
-					arrayPtr->size++;
-				}
+				arrayExtend(arrayPtr);
 			}
-		}
-		else
-		{
-			printf("Out of range");
+			
 		}
 	}
 	else
 	{
-		printf("Memmory error");
+		printf("Memmory allocate error");
 	}
 }
 
-int arrayRead(struct dArray* arrayPtr, int index)
+void* arrayRead(struct dArray* arrayPtr, int index)
 {
 	if (arrayPtr != NULL)
 	{
 		if (index >= 0 && index < arrayPtr->size)
 		{
-			if (arrayPtr->data != NULL)
-			{
-				return arrayPtr->data[index];
-			}
+			return ((char*)arrayPtr->data)[index * arrayPtr];
 		}
 		else
 		{
@@ -105,8 +97,9 @@ int arrayRead(struct dArray* arrayPtr, int index)
 	{
 		printf("Memmory error");
 	}
-	return 0;
+	return NULL;
 }
+
 int getSize(struct dArray* arrayPtr)
 {
 	if (arrayPtr != NULL)

@@ -1,8 +1,8 @@
 struct dArray;
 void arrayExtend(struct dArray* arrayPtr);
 
-void arrayWrite(struct dArray* arrayPtr,int index,int value);
-int arrayRead(struct dArray* arrayPtr,int index);
+void arrayWrite(struct dArray* arrayPtr,int index,void* value);
+void* arrayRead(struct dArray* arrayPtr,int index);
 
 void* arrayConstructor(int typeSize);
 void arrayDestructor();
