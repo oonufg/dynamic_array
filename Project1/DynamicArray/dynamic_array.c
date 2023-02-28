@@ -1,4 +1,4 @@
-#include "dynamic_massiv.h"
+#include "dynamic_array.h"
 #include "stdlib.h"
 #include "stdio.h"
 
@@ -71,7 +71,15 @@ void arrayWrite(struct dArray* arrayPtr, int index, void* value)
 			{
 				arrayExtend(arrayPtr);
 			}
-			
+			for (int i = 0 ; i < arrayPtr->typeSize;i++)
+			{
+				((char*)arrayPtr->data)[(index * arrayPtr->typeSize) + i] = ((int*)value) >> (8 * (arrayPtr->typeSize-1-i)) & 0xFF;
+			}
+
+			if (index == arrayPtr->size - 1)
+			{
+				arrayPtr->size++;
+			}
 		}
 	}
 	else
@@ -86,7 +94,7 @@ void* arrayRead(struct dArray* arrayPtr, int index)
 	{
 		if (index >= 0 && index < arrayPtr->size)
 		{
-			return ((char*)arrayPtr->data)[index * arrayPtr];
+			return ((char*)arrayPtr->data)[index * arrayPtr->typeSize];
 		}
 		else
 		{

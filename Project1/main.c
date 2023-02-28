@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "DynamicMassive/dynamic_massiv.h"
+#include "DynamicArray/dynamic_array.h"
 int main()
 {
 	struct dArray* arr = arrayConstructor(sizeof(double));
@@ -15,6 +15,6 @@ int main()
 	//arrayWrite(arr, 5, 2);
 
 
-	double* res = arrayRead(arr,2);
+	double* res = arrayRead(arr,0);
 	printf("%d", res);
 }
