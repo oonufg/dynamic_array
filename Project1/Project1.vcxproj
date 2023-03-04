@@ -127,11 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DynamicMassive\dynamic_massiv.c" />
+    <ClCompile Include="DynamicArray\DynamicArray.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DynamicMassive\dynamic_massiv.h" />
+    <ClInclude Include="DynamicArray\DynamicArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

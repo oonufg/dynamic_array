@@ -1,4 +1,4 @@
-#include "dynamic_array.h"
+#include "DynamicArray.h"
 #include "stdlib.h"
 #include "stdio.h"
 
@@ -73,10 +73,10 @@ void arrayWrite(struct dArray* arrayPtr, int index, void* value)
 			}
 			for (int i = 0 ; i < arrayPtr->typeSize;i++)
 			{
-				((char*)arrayPtr->data)[(index * arrayPtr->typeSize) + i] = ((int*)value) >> (8 * (arrayPtr->typeSize-1-i)) & 0xFF;
+				((unsigned char*)arrayPtr->data)[(index * arrayPtr->typeSize) + i] = ((unsigned char*)value)[i];
 			}
 
-			if (index == arrayPtr->size - 1)
+			if (index == arrayPtr->size)
 			{
 				arrayPtr->size++;
 			}
@@ -94,7 +94,7 @@ void* arrayRead(struct dArray* arrayPtr, int index)
 	{
 		if (index >= 0 && index < arrayPtr->size)
 		{
-			return ((char*)arrayPtr->data)[index * arrayPtr->typeSize];
+			return (((char*)arrayPtr->data) + index * arrayPtr->typeSize);
 		}
 		else
 		{
