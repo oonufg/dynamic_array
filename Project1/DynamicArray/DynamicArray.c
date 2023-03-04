@@ -2,7 +2,7 @@
 #include "stdlib.h"
 #include "stdio.h"
 
-struct dArray
+typedef struct _dArray
 {
 	void* data;
 	int capacity;
@@ -12,48 +12,48 @@ struct dArray
 
 void* arrayConstructor(int typeSize) 
 {
-	struct dArray* arrPtr = malloc(sizeof(struct dArray));
-	if (arrPtr != NULL && typeSize > 0)
+	dArray* arrayPtr = malloc(sizeof(dArray));
+	if (arrayPtr != NULL && typeSize > 0)
 	{
-		arrPtr->data = malloc(typeSize * 2);
-		if (arrPtr->data != NULL)
+		arrayPtr->data = malloc(typeSize * 2);
+		if (arrayPtr->data != NULL)
 		{
-			arrPtr->size = 0;
-			arrPtr->capacity = 2;
-			arrPtr->typeSize = typeSize;
+			arrayPtr->size = 0;
+			arrayPtr->capacity = 2;
+			arrayPtr->typeSize = typeSize;
 		}
 	}
 	else
 	{
 		printf("Memmory allocate error");
 	}
-	return arrPtr;
+	return arrayPtr;
 }
 
-void arrayDestructor(struct dArray* arrPtr)
+void arrayDestructor(dArray* arrayPtr)
 {
-	if (arrPtr != NULL)
+	if (arrayPtr != NULL)
 	{
-		if (arrPtr->data != NULL)
+		if (arrayPtr->data != NULL)
 		{
-			free(arrPtr->data);
+			free(arrayPtr->data);
 		}
-		free(arrPtr);
+		free(arrayPtr);
 	}
 }
 
-void arrayExtend(struct dArray* arrPtr)
+void arrayExtend(dArray* arrayPtr)
 {
-	void* newData = malloc(sizeof(arrPtr->typeSize) * (arrPtr->capacity * 2));
+	void* newData = malloc(sizeof(arrayPtr->typeSize) * (arrayPtr->capacity * 2));
 	if (newData != NULL)
 	{
-		for (int i = 0; i < (arrPtr->size * arrPtr->typeSize); i++)
+		for (int i = 0; i < (arrayPtr->size * arrayPtr->typeSize); i++)
 		{
-			((char*)newData)[i] = ((char*)arrPtr->data)[i];
+			((char*)newData)[i] = ((char*)arrayPtr->data)[i];
 		}
-		free(arrPtr->data);
-		arrPtr->data = newData;
-		arrPtr->capacity = arrPtr->capacity * 2;
+		free(arrayPtr->data);
+		arrayPtr->data = newData;
+		arrayPtr->capacity = arrayPtr->capacity * 2;
 	}
 	else
 	{
@@ -61,7 +61,7 @@ void arrayExtend(struct dArray* arrPtr)
 	}
 }
 
-void arrayWrite(struct dArray* arrayPtr, int index, void* value)
+void arrayWrite(dArray* arrayPtr, int index, void* value)
 {
 	if (arrayPtr != NULL)
 	{
@@ -88,13 +88,13 @@ void arrayWrite(struct dArray* arrayPtr, int index, void* value)
 	}
 }
 
-void* arrayRead(struct dArray* arrayPtr, int index)
+void* arrayRead(dArray* arrayPtr, int index)
 {
 	if (arrayPtr != NULL)
 	{
 		if (index >= 0 && index < arrayPtr->size)
 		{
-			return (((char*)arrayPtr->data) + index * arrayPtr->typeSize);
+			return (((unsigned char*)arrayPtr->data) + index * arrayPtr->typeSize);
 		}
 		else
 		{
@@ -108,7 +108,7 @@ void* arrayRead(struct dArray* arrayPtr, int index)
 	return NULL;
 }
 
-int getSize(struct dArray* arrayPtr)
+int getSize(dArray* arrayPtr)
 {
 	if (arrayPtr != NULL)
 	{
@@ -116,7 +116,7 @@ int getSize(struct dArray* arrayPtr)
 	}
 	return 0;
 }
-int _getCapacity(struct dArray* arrayPtr)
+int _getCapacity(dArray* arrayPtr)
 {
 	if (arrayPtr != NULL)
 	{

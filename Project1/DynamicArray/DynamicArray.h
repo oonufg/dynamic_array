@@ -1,4 +1,4 @@
-struct dArray;
+typedef struct _dArray dArray;
 void arrayExtend(struct dArray* arrayPtr);
 
 void arrayWrite(struct dArray* arrayPtr,int index,void* value);
