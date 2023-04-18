@@ -8,7 +8,7 @@ typedef struct _dArray
 	int capacity;
 	int size;
 	int typeSize;
-};
+} dArray;
 
 void* arrayConstructor(int typeSize) 
 {

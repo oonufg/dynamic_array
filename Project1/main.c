@@ -1,6 +1,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "DynamicArray/DynamicArray.h"
+
+
 int main()
 {
 	dArray* arr = arrayConstructor(sizeof(int));
@@ -16,4 +18,5 @@ int main()
 		printf("\n");
 	}
 	printf("%d", _getCapacity(arr));
+	return 0;
 }
